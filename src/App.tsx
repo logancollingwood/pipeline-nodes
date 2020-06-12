@@ -2,8 +2,8 @@ import React from 'react';
 import logo from './logo.svg';
 import './App.css';
 import Pipeline from './components/Pipeline';
-import PipelineDefinition from "./types/PipelineDefinition"
-import NODE_STATES from './types/NodeState';
+import PipelineDefinition from "./components/types/PipelineDefinition"
+import NODE_STATES from './components/types/NodeState';
 
 let jsonDefinition: PipelineDefinition = {
     pipelineName: "Test Pipeline",
@@ -29,7 +29,7 @@ let jsonDefinition: PipelineDefinition = {
           type: "test",
           state: NODE_STATES.Pending,
           children: [],
-        }
+        },
       ]
     }
 }

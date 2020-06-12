@@ -1,10 +1,9 @@
 import React from 'react';
-import PipelineNode from './../types/PipelineNode';
-
+import {Arrow} from "react-konva";
 
 type Props = { 
-    from: PipelineNode,
-    to: PipelineNode
+    from: [number, number],
+    to: [number, number]
 }
 
 type State = {
@@ -13,7 +12,10 @@ type State = {
 class Edge extends React.Component<Props, State>  {
     render() {
         return (
-            <div> Edge from: {this.props.from.label} to: {this.props.to.label}</div>
+            <Arrow
+                points={this.props.from.concat(this.props.to)}
+                stroke={'white'}
+            />
         );
     }
 }
