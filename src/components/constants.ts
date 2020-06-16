@@ -1,5 +1,5 @@
 const CONSTANTS = {
-    nodeSize: 45,
+    nodeSize: 90,
 }
 
 export default CONSTANTS;

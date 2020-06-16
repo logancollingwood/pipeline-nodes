@@ -4,6 +4,8 @@ import './App.css';
 import Pipeline from './components/Pipeline';
 import PipelineDefinition from "./components/types/PipelineDefinition"
 import NODE_STATES from './components/types/NodeState';
+import {Stage, Layer, Group} from "react-konva";
+import CONSTANTS from './components/constants';
 
 let jsonDefinition: PipelineDefinition = {
     pipelineName: "Test Pipeline",
@@ -13,10 +15,32 @@ let jsonDefinition: PipelineDefinition = {
       state: NODE_STATES.Success,
       children: [
         {
-          label: "second node",
+          label: "first child",
           type: "test",
           state: NODE_STATES.Success,
-          children: [],
+          children: [ {
+              label: "first child of first node",
+              type: "test",
+              state: NODE_STATES.Success,
+              children: [ {
+                  label: "nested third",
+                  type: "test",
+                  state: NODE_STATES.Success,
+                  children: [{
+                    label: "second node",
+                    type: "test",
+                    state: NODE_STATES.Success,
+                    children: []
+                  }]
+                }
+            ]
+            }, {
+              label: "first child of first node",
+              type: "test",
+              state: NODE_STATES.Success,
+              children: []
+            }
+          ],
         },
         {
           label: "third node",
@@ -37,8 +61,15 @@ function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <Pipeline pipelineDefinition={jsonDefinition}/>
+        Pipeline: {jsonDefinition.pipelineName}
       </header>
+          <Group className="pipeline-container">
+                <Stage width={window.innerWidth} height={window.innerHeight} draggable={true}>
+                    <Layer>
+                      <Pipeline node={jsonDefinition.rootNode} xOffset={0 + CONSTANTS.nodeSize}/>
+                    </Layer>
+                </Stage>
+        </Group>
     </div>
   );
 }
