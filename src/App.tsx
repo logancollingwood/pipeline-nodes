@@ -9,53 +9,47 @@ import CONSTANTS from './components/constants';
 
 let jsonDefinition: PipelineDefinition = {
     pipelineName: "Test Pipeline",
-    rootNode: {
-      label: "Root",
-      type: "test",
-      state: NODE_STATES.Success,
-      children: [
-        {
-          label: "first child",
-          type: "test",
-          state: NODE_STATES.Success,
-          children: [ {
-              label: "first child of first node",
-              type: "test",
-              state: NODE_STATES.Success,
-              children: [ {
-                  label: "nested third",
-                  type: "test",
-                  state: NODE_STATES.Success,
-                  children: [{
-                    label: "second node",
-                    type: "test",
-                    state: NODE_STATES.Success,
-                    children: []
-                  }]
-                }
-            ]
-            }, {
-              label: "first child of first node",
-              type: "test",
-              state: NODE_STATES.Success,
-              children: []
-            }
-          ],
-        },
-        {
-          label: "third node",
-          type: "test",
-          state: NODE_STATES.Failure,
-          children: [],
-        },
-        {
-          label: "fourth node",
-          type: "test",
-          state: NODE_STATES.Pending,
-          children: [],
-        },
-      ]
-    }
+    rootNode: [
+      {
+        nodes:[
+          {
+            label: "first child",
+            type: "test",
+            state: NODE_STATES.Success,
+          }
+        ]
+      },
+      {
+        nodes: [ {
+            label: "second stage part 1",
+            type: "test",
+            state: NODE_STATES.Success,
+          },
+          {
+            label: "second stage part 2",
+            type: "test",
+            state: NODE_STATES.Pending,
+          }
+        ]
+      },
+      {
+        nodes: [ {
+            label: "third stage part 1",
+            type: "test",
+            state: NODE_STATES.Success,
+          },
+        ]
+      },
+      {
+        nodes: [ {
+            label: "4 stage part 1",
+            type: "test",
+            state: NODE_STATES.Success,
+          },
+        ]
+      }
+
+    ]
 }
 function App() {
   return (
@@ -66,7 +60,7 @@ function App() {
           <Group className="pipeline-container">
                 <Stage width={window.innerWidth} height={window.innerHeight} draggable={true}>
                     <Layer>
-                      <Pipeline node={jsonDefinition.rootNode} xOffset={0 + CONSTANTS.nodeSize}/>
+                      <Pipeline steps={jsonDefinition.rootNode} />
                     </Layer>
                 </Stage>
         </Group>
